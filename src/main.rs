@@ -16,6 +16,29 @@ fn main() {
     if dim.width() {
         println!("width is {}", dim.width);
     }
+
+    //can hold
+    let dim1 = Dimension {
+        width: 30.0,
+        height: 50.0,
+    };
+
+    let dim2 = Dimension {
+        width: 10.0,
+        height: 40.0,
+    };
+
+    let dim3 = Dimension {
+        width: 60.0,
+        height: 45.0,
+    };
+
+    println!("Can dim1 hold dim2?{}", dim1.can_hold(&dim2));
+    println!("Can dim1 hold dim3?{}", Dimension::can_hold(&dim1, &dim3));
+
+    //call associated function with struct name
+    let sq = Dimension::square(3.0);
+    println!("sq is: {:?}", sq);
 }
 
 fn cal_area(w: f64, h: f64) -> f64 {
@@ -46,5 +69,17 @@ impl Dimension {
 
     fn width(&self) -> bool {
         self.width > 0.0
+    }
+
+    fn can_hold(&self, other: &Dimension) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    //constructor
+    fn square(size: f64) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
     }
 }
